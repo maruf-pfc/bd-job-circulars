@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+@theme {
+	--font-heading: 'Lexend', system-ui, -apple-system, sans-serif;
+	--font-sans: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+
+	/* Primary Brand (Professional Trust Blue - UI UX Pro Max Token) */
+	--color-brand-50: #F0F9FF;
+	--color-brand-100: #E0F2FE;
+	--color-brand-200: #BAE6FD;
+	--color-brand-300: #7DD3FC;
+	--color-brand-400: #38BDF8;
+	--color-brand-500: #0EA5E9;
+	--color-brand-600: #0284C7;
+	--color-brand-700: #0369A1;
+	--color-brand-800: #075985;
+	--color-brand-900: #0C4A6E;
+
+	/* Government Identity (Authentic Bangladesh Emerald Green) */
+	--color-gov-50: #ECFDF5;
+	--color-gov-100: #D1FAE5;
+	--color-gov-200: #A7F3D0;
+	--color-gov-500: #10B981;
+	--color-gov-600: #059669;
+	--color-gov-700: #047857;
+	--color-gov-800: #065F46;
+
+	/* Corporate Identity (Executive Indigo/Royal) */
+	--color-corp-50: #EEF2FF;
+	--color-corp-100: #E0E7FF;
+	--color-corp-200: #C7D2FE;
+	--color-corp-500: #6366F1;
+	--color-corp-600: #4F46E5;
+	--color-corp-700: #4338CA;
+	--color-corp-800: #3730A3;
+
+	/* High-Trust Surfaces & Slate Neutral Scale */
+	--color-surface: #FFFFFF;
+	--color-surface-subtle: #F8FAFC;
+	--color-surface-muted: #F1F5F9;
+	--color-border: #E2E8F0;
+	--color-border-strong: #CBD5E1;
+	--color-foreground: #0F172A;
+	--color-foreground-muted: #475569;
+	--color-foreground-subtle: #64748B;
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	background-color: #F8FAFC;
+}
+
+body {
+	font-family: var(--font-sans);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: #F8FAFC;
+	color: #0F172A;
+	min-height: 100dvh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--font-heading);
+	letter-spacing: -0.015em;
+}
+
+/* ── Interactive standard cursor ───────────────────────────────────────── */
+button,
+a,
+select,
+input[type="checkbox"],
+input[type="radio"],
+input[type="submit"] {
+	cursor: pointer;
+}
+
+/* ── Visible Focus (WCAG 2.2 compliant) ────────────────────────────────── */
+:focus-visible {
+	outline: 2px solid #0284C7;
+	outline-offset: 2px;
+	border-radius: 6px;
+}
+
+/* ── Reduced motion ───────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+/* ── Scrollbar (clean, subtle) ────────────────────────────────────────── */
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: #CBD5E1;
+	border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #94A3B8;
+}
