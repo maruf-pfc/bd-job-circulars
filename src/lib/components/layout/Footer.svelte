@@ -20,11 +20,6 @@
 				<p class="max-w-md text-xs leading-relaxed text-slate-600">
 					Bangladesh's dedicated portal for official government gazettes, BCS announcements, bank recruitments, and verified corporate job circulars. All notice PDFs are provided directly without intermediaries.
 				</p>
-
-				<div class="mt-4 flex items-center gap-2 text-xs text-slate-500">
-					<ShieldCheck size={14} class="text-emerald-600 shrink-0" />
-					<span>Direct, unadulterated links to official Teletalk & career portals.</span>
-				</div>
 			</div>
 
 			<!-- Categories -->

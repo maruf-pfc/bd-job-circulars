@@ -45,8 +45,8 @@ import type { Job } from '$lib/types/job.js';
 export const governmentJobs: Job[] = [
     {
         id: 1,
-        slug: 'taxes-zone-6-government-job-circular-dhaka',
-        title: 'Recruitment Circular 2026 – Multiple Positions',
+        slug: 'taxes-zone-6-dhaka-job-circular-2026',
+        title: 'Taxes Zone-6, Dhaka Job Circular 2026',
         organization: 'Office of the Commissioner of Taxes, Taxes Zone-6, Dhaka',
         category: 'government',
         employmentType: 'full-time',

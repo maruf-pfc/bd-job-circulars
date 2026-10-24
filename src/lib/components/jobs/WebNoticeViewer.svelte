@@ -13,6 +13,12 @@
 
 	const computedTitle = $derived(title || 'Official Notice & Application Portal');
 
+	const viewerSrc = $derived(
+		noticeUrl.startsWith('http://') || noticeUrl.startsWith('https://')
+			? `/api/proxy?url=${encodeURIComponent(noticeUrl)}`
+			: noticeUrl,
+	);
+
 	function toggleExpand() {
 		isExpanded = !isExpanded;
 	}
@@ -76,7 +82,7 @@
 	<!-- Scrollable Webpage Viewport via iframe -->
 	<div class="relative w-full overflow-hidden bg-slate-50 {isExpanded ? 'flex-1' : 'h-[750px]'}">
 		<iframe
-			src={noticeUrl}
+			src={viewerSrc}
 			title="{computedTitle} — Embedded Webpage"
 			class="h-full w-full border-0 bg-white"
 			loading="lazy"
