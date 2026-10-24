@@ -21,7 +21,7 @@ export type JobStatus = 'open' | 'closed' | 'upcoming';
  * 1. Open the relevant file: `src/lib/data/government-jobs.ts` or `src/lib/data/corporate-jobs.ts`.
  * 2. Find the current highest `id` across **both** files.
  * 3. Add your new record with `id = highestId + 1`.
- * 4. Set `publishedAt` to today's date (ISO 8601, e.g. `"2026-11-01"`).
+ * 4. Set `publishedAt` to today's date ('DD-MM-YYYY', e.g. `"24-10-2026"`).
  * 5. Fill in as many fields as you have; leave the rest out entirely.
  * 6. Save and the site will pick it up automatically.
  *
@@ -57,11 +57,11 @@ export interface Job {
 	experience?: string;
 	/** Age limits, e.g. "18–30 years". */
 	ageLimit?: string;
-	/** ISO 8601 date when applications open, e.g. "2026-10-01". */
+	/** Date when applications open in 'DD-MM-YYYY' format, e.g. "01-11-2026". */
 	applicationStartDate?: string;
-	/** ISO 8601 date of the last application day. */
+	/** Date of the last application day in 'DD-MM-YYYY' format, e.g. "30-11-2026". */
 	applicationDeadline?: string;
-	/** ISO 8601 date-time when this circular was published. */
+	/** Date when this circular was published in 'DD-MM-YYYY' format, e.g. "24-10-2026". */
 	publishedAt?: string;
 	/** Short description shown on listing cards. */
 	description?: string;

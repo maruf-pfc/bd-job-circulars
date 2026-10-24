@@ -64,7 +64,7 @@
 
 		<!-- Subtitle -->
 		<p class="mt-4 text-base text-slate-600 sm:text-lg max-w-2xl mx-auto leading-relaxed">
-			Discover official government gazettes, BCS announcements, state-owned bank vacancies, and top corporate job circulars with direct PDF notices.
+			Discover official government gazettes, BCS announcements, state-owned bank vacancies, and top corporate job circulars with live official circular portals.
 		</p>
 
 		<!-- Multi-Field Integrated Search Bar -->

@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { getJobStatus, isPdfUrl, filterJobs, searchJobs, sortJobs } from './jobs.js';
 import type { Job } from '$lib/types/job.js';
 
+import { parseDate, formatDate } from './dates.js';
+
 describe('getJobStatus dynamic deadline logic', () => {
 	it('dynamically marks a job as closed if deadline has passed even if status is set to open', () => {
 		const job: Job = {
@@ -16,7 +18,31 @@ describe('getJobStatus dynamic deadline logic', () => {
 		expect(getJobStatus(job)).toBe('closed');
 	});
 
-	it('returns open for future deadlines', () => {
+	it('dynamically marks a job as closed for DD-MM-YYYY expired deadlines', () => {
+		const job: Job = {
+			id: 103,
+			category: 'corporate',
+			title: 'Expired DD-MM-YYYY Job',
+			applicationDeadline: '01-01-2020',
+			status: 'open',
+		};
+
+		expect(getJobStatus(job)).toBe('closed');
+	});
+
+	it('returns open for future deadlines in DD-MM-YYYY format', () => {
+		const job: Job = {
+			id: 104,
+			category: 'corporate',
+			title: 'Active Job DD-MM-YYYY',
+			applicationDeadline: '31-12-2099',
+			status: 'open',
+		};
+
+		expect(getJobStatus(job)).toBe('open');
+	});
+
+	it('returns open for future deadlines in ISO format', () => {
 		const futureDate = new Date();
 		futureDate.setFullYear(futureDate.getFullYear() + 1);
 
@@ -29,6 +55,21 @@ describe('getJobStatus dynamic deadline logic', () => {
 		};
 
 		expect(getJobStatus(job)).toBe('open');
+	});
+});
+
+describe('dates utility DD-MM-YYYY format', () => {
+	it('parses DD-MM-YYYY correctly', () => {
+		const d = parseDate('24-10-2026');
+		expect(d).not.toBeNull();
+		expect(d?.getFullYear()).toBe(2026);
+		expect(d?.getMonth()).toBe(9); // 0-indexed October
+		expect(d?.getDate()).toBe(24);
+	});
+
+	it('formats date string to DD-MM-YYYY', () => {
+		expect(formatDate('24-10-2026')).toBe('24-10-2026');
+		expect(formatDate('2026-10-24')).toBe('24-10-2026');
 	});
 });
 

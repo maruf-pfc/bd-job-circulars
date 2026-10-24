@@ -3,9 +3,9 @@
  * Never mutates the original data arrays.
  */
 
-import { governmentJobs } from '$lib/data/government-jobs.js';
-import { corporateJobs } from '$lib/data/corporate-jobs.js';
-import type { Job, JobCategory, JobStatus } from '$lib/types/job.js';
+import { governmentJobs } from '../data/government-jobs.js';
+import { corporateJobs } from '../data/corporate-jobs.js';
+import type { Job, JobCategory, JobStatus } from '../types/job.js';
 import { parseDate, isDeadlinePassed, isDeadlineApproaching } from './dates.js';
 
 // ─── Development-time validation ─────────────────────────────────────────────

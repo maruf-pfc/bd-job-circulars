@@ -1,12 +1,12 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { getJobStatus, isValidUrl, isPdfUrl } from '$lib/utils/jobs.js';
+	import { getJobStatus, isValidUrl } from '$lib/utils/jobs.js';
 	import { formatDate, daysUntilDeadline, isDeadlineApproaching } from '$lib/utils/dates.js';
 	import { buildSeoMeta, SITE_NAME } from '$lib/utils/seo.js';
 	import Badge from '$lib/components/ui/Badge.svelte';
 	import JobCard from '$lib/components/jobs/JobCard.svelte';
 	import Breadcrumb from '$lib/components/layout/Breadcrumb.svelte';
-	import PdfNoticeViewer from '$lib/components/jobs/PdfNoticeViewer.svelte';
+	import WebNoticeViewer from '$lib/components/jobs/WebNoticeViewer.svelte';
 	import {
 		MapPin,
 		Banknote,
@@ -17,6 +17,7 @@
 		Briefcase,
 		ExternalLink,
 		FileText,
+		Globe,
 		Mail,
 		Share2,
 		CheckCircle2,
@@ -259,8 +260,8 @@
 							rel="noopener noreferrer"
 							class="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-50 hover:text-slate-900"
 						>
-							<FileText size={14} />
-							<span>{isPdfUrl(job.officialNoticeLink) ? 'Official Notice (PDF)' : 'Official Notice Page'}</span>
+							<Globe size={14} />
+							<span>Official Notice Page</span>
 						</a>
 					{/if}
 
@@ -287,7 +288,7 @@
 					<h2 class="font-heading mb-3 text-sm font-bold uppercase tracking-wider text-slate-900">
 						Notice Overview
 					</h2>
-					<p class="text-xs sm:text-sm leading-relaxed text-slate-700">
+					<p class="text-xs sm:text-sm leading-relaxed text-slate-700 whitespace-pre-line">
 						{job.description}
 					</p>
 				</div>
@@ -334,16 +335,16 @@
 						<ShieldCheck size={16} class="text-emerald-700" />
 						Application Procedures
 					</h2>
-					<p class="text-xs sm:text-sm leading-relaxed text-slate-800">
+					<p class="text-xs sm:text-sm leading-relaxed text-slate-800 whitespace-pre-line">
 						{job.applicationInstructions}
 					</p>
 				</div>
 			{/if}
 
-			<!-- Official PDF Notice / Circular Page (scrollable inside website via iframe) -->
+			<!-- Official Webpage Notice / Circular Page (scrollable inside website via iframe) -->
 			{#if hasNoticeFrame && noticeUrl}
-				<PdfNoticeViewer
-					pdfUrl={noticeUrl}
+				<WebNoticeViewer
+					noticeUrl={noticeUrl}
 					organization={job.organization}
 				/>
 			{/if}
