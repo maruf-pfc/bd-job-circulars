@@ -44,14 +44,15 @@
 	const hasValidApplyLink = $derived(
 		!!job.applicationLink && isValidUrl(job.applicationLink) && status !== 'closed',
 	);
+	const isGovernmentJob = $derived(job.category === 'government');
 	const noticeUrl = $derived(
-		job?.officialNoticeLink && isValidUrl(job.officialNoticeLink)
+		isGovernmentJob && job?.officialNoticeLink && isValidUrl(job.officialNoticeLink)
 			? job.officialNoticeLink
-			: job?.applicationLink && isValidUrl(job.applicationLink)
+			: isGovernmentJob && job?.applicationLink && isValidUrl(job.applicationLink)
 				? job.applicationLink
 				: undefined,
 	);
-	const hasNoticeFrame = $derived(!!noticeUrl);
+	const hasNoticeFrame = $derived(isGovernmentJob && !!noticeUrl);
 
 	const seo = $derived(
 		buildSeoMeta({
@@ -241,7 +242,7 @@
 						rel="noopener noreferrer"
 						class="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#0369A1] px-5 py-2.5 text-xs font-semibold text-white shadow-xs transition-all duration-200 hover:shadow-md hover:brightness-105 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-[#0284C7]"
 					>
-						<span>Apply Online via Official Portal</span>
+						<span>{isGovernmentJob ? 'Apply Online via Official Portal' : 'Apply Online'}</span>
 						<ExternalLink size={14} class="transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
 					</a>
 				{:else if status === 'closed'}
@@ -256,7 +257,7 @@
 					</div>
 				{/if}
 
-				{#if job.officialNoticeLink && isValidUrl(job.officialNoticeLink)}
+				{#if isGovernmentJob && job.officialNoticeLink && isValidUrl(job.officialNoticeLink)}
 					<a
 						href={job.officialNoticeLink}
 						target="_blank"
@@ -472,8 +473,8 @@
 			</div>
 		{/if}
 
-		<!-- Official Webpage Notice / Circular Page (Full Width, scrollable inside website via iframe) -->
-		{#if hasNoticeFrame && noticeUrl}
+		<!-- Official Webpage Notice / Circular Page (Only for Government circulars with official notice gazette/portal) -->
+		{#if isGovernmentJob && hasNoticeFrame && noticeUrl}
 			<WebNoticeViewer
 				noticeUrl={noticeUrl}
 				organization={job.organization}
