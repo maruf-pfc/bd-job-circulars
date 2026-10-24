@@ -7,17 +7,27 @@ export const GET: RequestHandler = () => {
 
 	const staticRoutes = ['', '/jobs', '/jobs/government', '/jobs/corporate'];
 
+	const formatLastmod = (dateStr?: string) => {
+		if (!dateStr) return new Date().toISOString().split('T')[0];
+		if (/^\d{2}-\d{2}-\d{4}$/.test(dateStr)) {
+			const [d, m, y] = dateStr.split('-');
+			return `${y}-${m}-${d}`;
+		}
+		return dateStr;
+	};
+
 	const jobUrls = jobs
 		.filter((j) => j.slug)
 		.map(
 			(j) =>
 				`  <url>
     <loc>${SITE_URL}/jobs/${j.slug}</loc>
-    <lastmod>${j.publishedAt ?? new Date().toISOString().split('T')[0]}</lastmod>
+    <lastmod>${formatLastmod(j.publishedAt)}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>`,
 		);
+
 
 	const staticUrls = staticRoutes.map(
 		(path) =>

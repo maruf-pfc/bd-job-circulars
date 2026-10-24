@@ -1,3 +1,10 @@
-# allow crawling everything by default
+# Robots.txt for BD Job Circulars
+# https://bd-job-circulars.vercel.app/
+
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /api/
+
+# Sitemaps
+Sitemap: https://bd-job-circulars.vercel.app/sitemap.xml
+Host: https://bd-job-circulars.vercel.app

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { Menu, X, Landmark, Briefcase, LayoutGrid, Search, ArrowRight, ShieldCheck } from 'lucide-svelte';
+	import { Menu, X, Landmark, Briefcase, LayoutGrid, Search, ArrowRight, ShieldCheck, Globe } from 'lucide-svelte';
+	import { getLocale, setLocale } from '#lib/paraglide/runtime.js';
 
 	let mobileMenuOpen = $state(false);
 
@@ -19,7 +20,13 @@
 		if (href === '/') return page.url.pathname === '/';
 		return page.url.pathname.startsWith(href);
 	}
+
+	function toggleLanguage() {
+		const next = getLocale() === 'bn-bd' ? 'en-us' : 'bn-bd';
+		setLocale(next);
+	}
 </script>
+
 
 <header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-md transition-all duration-200">
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -35,10 +42,6 @@
 					class="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#0284C7] via-[#0369A1] to-[#075985] text-white shadow-sm ring-1 ring-sky-700/20 transition-all duration-200 group-hover:scale-105 group-hover:shadow-md"
 				>
 					<Landmark size={20} strokeWidth={2.2} />
-					<span class="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-						<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-						<span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
-					</span>
 				</div>
 				<div class="flex flex-col">
 					<div class="flex items-center gap-1.5 leading-none">
@@ -71,8 +74,19 @@
 				{/each}
 			</nav>
 
-			<!-- Quick Actions: Live Indicator & Browse Button -->
-			<div class="hidden sm:flex items-center gap-3">
+			<!-- Quick Actions: Language Switcher & Browse Button -->
+			<div class="hidden sm:flex items-center gap-2.5">
+				<!-- Language Switcher Pill -->
+				<button
+					type="button"
+					onclick={toggleLanguage}
+					class="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-2xs transition hover:bg-slate-100 hover:text-slate-900 active:scale-[0.98]"
+					title="Switch language (English / বাংলা)"
+				>
+					<Globe size={13} class="text-[#0284C7]" />
+					<span>{getLocale() === 'bn-bd' ? 'বাংলা' : 'English'}</span>
+				</button>
+
 				<a
 					href="/jobs"
 					class="group inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2 text-xs font-semibold text-white shadow-xs transition-all duration-200 hover:bg-slate-800 hover:shadow-sm active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
@@ -128,7 +142,19 @@
 					</a>
 				{/each}
 
-				<div class="mt-3 pt-3 border-t border-slate-100">
+				<div class="mt-3 pt-3 border-t border-slate-100 space-y-2">
+					<button
+						type="button"
+						onclick={() => {
+							toggleLanguage();
+							closeMobileMenu();
+						}}
+						class="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 py-2.5 text-xs font-semibold text-slate-800"
+					>
+						<Globe size={14} class="text-[#0284C7]" />
+						<span>Language: {getLocale() === 'bn-bd' ? 'বাংলা' : 'English'} (Switch)</span>
+					</button>
+
 					<a
 						href="/jobs"
 						onclick={closeMobileMenu}
@@ -142,4 +168,5 @@
 		</nav>
 	{/if}
 </header>
+
 

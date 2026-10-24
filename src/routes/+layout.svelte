@@ -6,26 +6,44 @@
 	import { page } from '$app/state';
 	import './layout.css';
 	import favicon from '#lib/assets/favicon.svg';
-	import { buildWebSiteSchema, SITE_NAME, SITE_DESCRIPTION } from '$lib/utils/seo.js';
+	import { buildWebSiteSchema, buildOrganizationSchema, SITE_NAME, SITE_DESCRIPTION, SITE_URL } from '$lib/utils/seo.js';
 
 	let { children }: LayoutProps = $props();
 
 	const websiteSchema = buildWebSiteSchema();
+	const organizationSchema = buildOrganizationSchema();
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-	<!-- Default meta — individual pages override these -->
-	<title>{SITE_NAME}</title>
+	<link rel="icon" type="image/svg+xml" href={favicon} />
+	<!-- Base Canonical & Meta Tags -->
+	<link rel="canonical" href={`${SITE_URL}${page.url.pathname}`} />
+	<title>{SITE_NAME} — Official Bangladesh Job Circulars 2026</title>
 	<meta name="description" content={SITE_DESCRIPTION} />
+	<meta name="keywords" content="BD Job Circular, Government Job Circular 2026, BCS Circular, Bangladesh Chakrir Khobor, Teletalk Govt Job, Bank Job Circular, Ministry Jobs BD" />
+	
+	<!-- Open Graph / Facebook -->
 	<meta property="og:site_name" content={SITE_NAME} />
 	<meta property="og:type" content="website" />
+	<meta property="og:url" content={`${SITE_URL}${page.url.pathname}`} />
+	<meta property="og:title" content={`${SITE_NAME} — Official Bangladesh Job Circulars 2026`} />
+	<meta property="og:description" content={SITE_DESCRIPTION} />
+	<meta property="og:image" content={`${SITE_URL}/og-image.png`} />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:locale:alternate" content="bn_BD" />
+
+	<!-- Twitter / X Cards -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={`${SITE_NAME} — Official Bangladesh Job Circulars 2026`} />
+	<meta name="twitter:description" content={SITE_DESCRIPTION} />
+	<meta name="twitter:image" content={`${SITE_URL}/og-image.png`} />
 </svelte:head>
 
 {@html `<script type="application/ld+json">${JSON.stringify(websiteSchema)}</script>`}
+{@html `<script type="application/ld+json">${JSON.stringify(organizationSchema)}</script>`}
+
 
 <div class="flex min-h-dvh flex-col">
 	<Header />

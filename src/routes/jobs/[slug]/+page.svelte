@@ -2,7 +2,8 @@
 	import type { PageData } from './$types';
 	import { getJobStatus, isValidUrl } from '$lib/utils/jobs.js';
 	import { formatDate, daysUntilDeadline, isDeadlineApproaching } from '$lib/utils/dates.js';
-	import { buildSeoMeta, SITE_NAME } from '$lib/utils/seo.js';
+	import { buildSeoMeta, SITE_NAME, SITE_URL } from '$lib/utils/seo.js';
+
 	import Badge from '$lib/components/ui/Badge.svelte';
 	import JobCard from '$lib/components/jobs/JobCard.svelte';
 	import Breadcrumb from '$lib/components/layout/Breadcrumb.svelte';
@@ -61,9 +62,11 @@
 				job.description?.slice(0, 155) ??
 				`View the full details for this ${job.category} job circular in Bangladesh.`,
 			path: `/jobs/${job.slug ?? job.id}`,
+			ogImage: `${SITE_URL}/og/${job.slug ?? job.id}.png`,
 			ogType: 'article',
 		}),
 	);
+
 
 	const employmentTypeLabel: Record<string, string> = {
 		'full-time': 'Full-time',
@@ -100,11 +103,23 @@
 <svelte:head>
 	<title>{seo.title}</title>
 	<meta name="description" content={seo.description} />
+	<meta name="keywords" content={`${job.title}, ${job.organization}, ${job.category} job circular, ${job.location ?? 'Bangladesh'}, Bangladesh Govt Job, Chakrir Khobor`} />
 	{#if seo.canonical}<link rel="canonical" href={seo.canonical} />{/if}
 	<meta property="og:title" content={seo.ogTitle} />
 	<meta property="og:description" content={seo.ogDescription} />
-	<meta property="og:type" content={seo.ogType} />
+	<meta property="og:type" content="article" />
 	<meta property="og:url" content={absoluteUrl} />
+	<meta property="og:image" content={seo.ogImage} />
+	{#if job.publishedAt}
+		<meta property="article:published_time" content={job.publishedAt} />
+	{/if}
+	<meta property="article:section" content={job.category === 'government' ? 'Government Jobs' : 'Corporate Jobs'} />
+	
+	<!-- Twitter / X Card -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={seo.ogTitle} />
+	<meta name="twitter:description" content={seo.ogDescription} />
+	<meta name="twitter:image" content={seo.ogImage} />
 </svelte:head>
 
 {#if jobSchema}
@@ -131,24 +146,35 @@
 	<article class="space-y-6" aria-label="Job circular announcement details">
 		<!-- Header Card -->
 		<div class="rounded-2xl border border-slate-200/90 bg-gradient-to-br from-white via-white to-slate-50/50 p-6 sm:p-8 shadow-xs">
-			<!-- Badges -->
-			<div class="mb-4 flex flex-wrap items-center gap-2">
-				<Badge
-					variant={job.category}
-					label={job.category === 'government' ? 'Government Circular' : 'Corporate Vacancy'}
-					size="base"
-				/>
-				<Badge
-					variant={status}
-					label={status === 'closed' ? 'Closed' : status === 'upcoming' ? 'Upcoming' : 'Open'}
-					size="base"
-				/>
-				{#if job.employmentType}
+			<!-- Badges & Live Reader Counter -->
+			<div class="mb-4 flex flex-wrap items-center justify-between gap-2">
+				<div class="flex flex-wrap items-center gap-2">
 					<Badge
-						variant="employmentType"
-						label={employmentTypeLabel[job.employmentType] ?? job.employmentType}
+						variant={job.category}
+						label={job.category === 'government' ? 'Government Circular' : 'Corporate Vacancy'}
+						size="base"
 					/>
-				{/if}
+					<Badge
+						variant={status}
+						label={status === 'closed' ? 'Closed' : status === 'upcoming' ? 'Upcoming' : 'Open'}
+						size="base"
+					/>
+					{#if job.employmentType}
+						<Badge
+							variant="employmentType"
+							label={employmentTypeLabel[job.employmentType] ?? job.employmentType}
+						/>
+					{/if}
+				</div>
+
+				<!-- Live Verified Reader Counter -->
+				<div class="inline-flex items-center gap-1.5 rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold text-[#0369A1] ring-1 ring-sky-200">
+					<span class="relative flex h-2 w-2">
+						<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
+						<span class="relative inline-flex h-2 w-2 rounded-full bg-[#0284C7]"></span>
+					</span>
+					<span><strong>{data.views ?? 1}</strong> {(data.views ?? 1) === 1 ? 'reader viewed this circular' : 'readers viewed this circular'}</span>
+				</div>
 			</div>
 
 			<!-- Official Circular Title -->

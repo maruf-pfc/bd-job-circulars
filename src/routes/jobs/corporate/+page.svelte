@@ -48,9 +48,17 @@
 <svelte:head>
 	<title>{seo.title}</title>
 	<meta name="description" content={seo.description} />
+	<meta name="keywords" content="Bank Jobs Bangladesh, Corporate Job Circular, Private Sector Jobs BD, NGO Jobs Bangladesh, Software Engineer Jobs Dhaka, Commercial Bank Recruitment" />
 	{#if seo.canonical}<link rel="canonical" href={seo.canonical} />{/if}
 	<meta property="og:title" content={seo.ogTitle} />
 	<meta property="og:description" content={seo.ogDescription} />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={seo.ogUrl} />
+	<meta property="og:image" content={seo.ogImage} />
+	<meta name="twitter:card" content={seo.twitterCard} />
+	<meta name="twitter:title" content={seo.ogTitle} />
+	<meta name="twitter:description" content={seo.ogDescription} />
+	<meta name="twitter:image" content={seo.ogImage} />
 </svelte:head>
 
 <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">

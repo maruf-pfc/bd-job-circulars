@@ -1,10 +1,13 @@
 import type { RequestHandler } from '@sveltejs/kit';
+import { SITE_URL } from '$lib/utils/seo.js';
 
 export const GET: RequestHandler = () => {
 	const body = `User-agent: *
 Allow: /
+Disallow: /api/
 
-Sitemap: https://bdjobcirculars.com/sitemap.xml
+Sitemap: ${SITE_URL}/sitemap.xml
+Host: ${SITE_URL}
 `;
 	return new Response(body, {
 		headers: {
@@ -13,3 +16,4 @@ Sitemap: https://bdjobcirculars.com/sitemap.xml
 		},
 	});
 };
+

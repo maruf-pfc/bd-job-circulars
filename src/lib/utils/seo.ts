@@ -4,8 +4,8 @@
 
 export const SITE_NAME = 'BD Job Circulars';
 export const SITE_DESCRIPTION =
-	'Find the latest government and corporate job circulars in Bangladesh. Search thousands of opportunities and apply today.';
-export const SITE_URL = 'https://bdjobcirculars.com';
+	'Discover official Bangladesh government job circulars, BCS gazettes, 2026 ministry notices, state bank recruitments, and corporate vacancies. Verified circulars with live application portals.';
+export const SITE_URL = 'https://bd-job-circulars.vercel.app';
 
 export interface SeoMeta {
 	title: string;
@@ -15,10 +15,13 @@ export interface SeoMeta {
 	ogDescription?: string;
 	ogImage?: string;
 	ogType?: string;
+	ogUrl?: string;
+	twitterCard?: 'summary' | 'summary_large_image';
+	keywords?: string;
 }
 
 /**
- * Build consistent SEO metadata for a page.
+ * Build consistent, search-engine-optimized metadata for a page.
  */
 export function buildSeoMeta(options: {
 	title: string;
@@ -26,20 +29,29 @@ export function buildSeoMeta(options: {
 	path?: string;
 	ogImage?: string;
 	ogType?: string;
+	keywords?: string;
 }): SeoMeta {
 	const fullTitle =
-		options.title === SITE_NAME ? SITE_NAME : `${options.title} — ${SITE_NAME}`;
+		options.title === SITE_NAME ? `${SITE_NAME} — Official Bangladesh Job Circulars 2026` : `${options.title} — ${SITE_NAME}`;
+
+	const canonicalUrl = options.path ? `${SITE_URL}${options.path}` : SITE_URL;
 
 	return {
 		title: fullTitle,
 		description: options.description.slice(0, 160),
-		canonical: options.path ? `${SITE_URL}${options.path}` : undefined,
+		canonical: canonicalUrl,
 		ogTitle: fullTitle,
 		ogDescription: options.description.slice(0, 200),
 		ogImage: options.ogImage ?? `${SITE_URL}/og-image.png`,
 		ogType: options.ogType ?? 'website',
+		ogUrl: canonicalUrl,
+		twitterCard: 'summary_large_image',
+		keywords:
+			options.keywords ??
+			'BD Job Circular, Government Job Circular 2026, BCS Circular, Bangladesh Chakrir Khobor, Teletalk Govt Job, Bank Job Circular, Ministry Jobs BD, Bangladesh Career Notice',
 	};
 }
+
 
 import type { Job } from '$lib/types/job.js';
 import { getJobStatus } from './jobs.js';
@@ -150,3 +162,28 @@ export function buildWebSiteSchema(): object {
 		},
 	};
 }
+
+/**
+ * Build Organization JSON-LD for rich brand knowledge graph snippets.
+ */
+export function buildOrganizationSchema(): object {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'Organization',
+		name: SITE_NAME,
+		url: SITE_URL,
+		logo: `${SITE_URL}/favicon.svg`,
+		image: `${SITE_URL}/og-image.png`,
+		sameAs: [
+			'https://bpsc.gov.bd',
+			'http://www.teletalk.com.bd',
+			'https://erecruitment.bb.org.bd',
+		],
+		description: SITE_DESCRIPTION,
+		areaServed: {
+			'@type': 'Country',
+			name: 'Bangladesh',
+		},
+	};
+}
+
