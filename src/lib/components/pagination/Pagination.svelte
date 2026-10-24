@@ -16,7 +16,7 @@
 		showPerPageSelector = true,
 	}: Props = $props();
 
-	const PER_PAGE_OPTIONS = [10, 20, 50];
+	const PER_PAGE_OPTIONS = [20, 50, 100];
 
 	function getPageNumbers(current: number, total: number): (number | '…')[] {
 		if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);

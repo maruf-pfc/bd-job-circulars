@@ -68,7 +68,7 @@
 
 <div class="space-y-4">
 	<!-- Search & Quick Action Bar -->
-	<div class="rounded-xl border border-slate-200 bg-white p-3.5 sm:p-4 shadow-sm">
+	<div class="rounded-2xl border border-slate-200/90 bg-white p-3.5 sm:p-4 shadow-xs">
 		<div class="flex flex-col gap-3 sm:flex-row sm:items-center">
 			<!-- Search Input -->
 			<div class="relative flex-1">
@@ -83,7 +83,7 @@
 					placeholder="Search job title, organization, ministry, or degree…"
 					value={query}
 					oninput={(e) => onQueryChange((e.target as HTMLInputElement).value)}
-					class="w-full rounded-lg border border-slate-200 bg-slate-50/50 py-2.5 pl-10 pr-9 text-sm text-slate-900 placeholder-slate-400 transition-colors focus:border-[#0284C7] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0284C7]/20"
+					class="w-full rounded-xl border border-slate-200 bg-slate-50/60 py-2.5 pl-10 pr-9 text-sm text-slate-900 placeholder-slate-400 transition-all focus:border-[#0284C7] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0284C7]/20"
 					aria-label="Search job circulars"
 				/>
 				{#if query}
@@ -103,7 +103,7 @@
 				<button
 					type="button"
 					onclick={() => (mobileFiltersOpen = !mobileFiltersOpen)}
-					class="flex flex-1 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-slate-50 py-2.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100"
+					class="flex flex-1 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50/80 py-2.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100"
 					aria-expanded={mobileFiltersOpen}
 					aria-label="Open filter settings"
 				>
@@ -120,7 +120,7 @@
 					<button
 						type="button"
 						onclick={onReset}
-						class="flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs font-semibold text-rose-600 hover:bg-rose-50"
+						class="flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-xs font-semibold text-rose-600 hover:bg-rose-50"
 						title="Reset all filters"
 					>
 						<RotateCcw size={13} />
@@ -136,7 +136,7 @@
 					id="desktop-sort"
 					value={sort}
 					onchange={(e) => onSortChange((e.target as HTMLSelectElement).value as SortOrder)}
-					class="rounded-lg border border-slate-200 bg-slate-50/50 py-2 pl-3 pr-8 text-xs font-medium text-slate-700 focus:border-[#0284C7] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0284C7]/20"
+					class="rounded-xl border border-slate-200 bg-slate-50/70 py-2 pl-3 pr-8 text-xs font-medium text-slate-700 transition-colors hover:border-slate-300 focus:border-[#0284C7] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0284C7]/20 cursor-pointer"
 				>
 					{#each sortOptions as opt}
 						<option value={opt.value}>{opt.label}</option>

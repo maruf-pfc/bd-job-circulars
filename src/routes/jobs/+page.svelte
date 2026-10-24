@@ -71,19 +71,31 @@
 
 <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">
 	<!-- Page Header & Breadcrumbs -->
-	<div class="border-b border-slate-200 pb-5">
+	<div class="rounded-2xl border border-sky-100 bg-gradient-to-r from-sky-50/80 via-white to-white p-6 shadow-xs">
 		<Breadcrumb items={[{ label: 'All Job Circulars' }]} />
-		<div class="mt-3 flex flex-wrap items-baseline justify-between gap-2">
+		<div class="mt-4 flex flex-wrap items-center justify-between gap-4">
 			<div>
-				<h1 class="font-heading text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-					All Job Circulars
-				</h1>
-				<p class="mt-1 text-xs text-slate-500">
-					Explore verified government gazettes, autonomous agency notices, and private recruitment circulars.
+				<div class="flex items-center gap-2">
+					<h1 class="font-heading text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+						All Job Circulars
+					</h1>
+					<span class="inline-flex items-center gap-1 rounded-full bg-sky-100 px-2.5 py-0.5 text-xs font-semibold text-sky-800">
+						Directory
+					</span>
+				</div>
+				<p class="mt-1 text-xs text-slate-600 max-w-2xl">
+					Explore verified government gazettes, autonomous agency notices, and private recruitment circulars across Bangladesh.
 				</p>
 			</div>
-			<div class="rounded-full bg-slate-100 px-3.5 py-1 text-xs font-semibold text-slate-700">
-				{data.activeCount} Active • {data.totalCount} Total Circulars
+
+			<div class="rounded-xl border border-sky-200/80 bg-white px-4 py-2 text-xs font-semibold text-sky-900 shadow-2xs text-center">
+				<div class="flex items-baseline justify-center gap-1.5">
+					<span class="text-2xl font-extrabold text-sky-700">{data.activeCount}</span>
+					<span class="text-xs font-semibold text-slate-500">/ {data.totalCount}</span>
+				</div>
+				<span class="text-[11px] font-semibold text-slate-600 uppercase tracking-wide">
+					Active Circulars
+				</span>
 			</div>
 		</div>
 	</div>
@@ -105,9 +117,9 @@
 
 	<!-- Results List or Empathetic Empty State -->
 	{#if data.pagination.items.length === 0}
-		<div class="flex flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white p-12 text-center shadow-sm">
-			<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-slate-400 mb-4">
-				<Search size={24} />
+		<div class="flex flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white p-12 text-center shadow-xs animate-fade-up">
+			<div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-400 mb-4 animate-pulse-subtle">
+				<Search size={26} />
 			</div>
 			<h2 class="font-heading text-base font-bold text-slate-800">
 				No job circulars match your criteria
@@ -117,7 +129,7 @@
 			</p>
 			<button
 				type="button"
-				class="mt-5 inline-flex items-center gap-1.5 rounded-lg bg-slate-900 px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-slate-800"
+				class="mt-5 inline-flex items-center gap-1.5 rounded-xl bg-slate-900 px-4 py-2.5 text-xs font-semibold text-white shadow-xs transition hover:bg-slate-800 active:scale-[0.98]"
 				onclick={handleReset}
 			>
 				<RotateCcw size={13} />
@@ -126,8 +138,10 @@
 		</div>
 	{:else}
 		<div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-			{#each data.pagination.items as job (job.id)}
-				<JobCard {job} />
+			{#each data.pagination.items as job, i (job.id)}
+				<div class="animate-fade-up stagger-{(i % 6) + 1}">
+					<JobCard {job} />
+				</div>
 			{/each}
 		</div>
 

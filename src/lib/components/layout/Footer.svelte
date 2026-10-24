@@ -2,14 +2,14 @@
 	import { Landmark, Mail, ExternalLink, ShieldCheck, FileText } from 'lucide-svelte';
 </script>
 
-<footer class="mt-20 border-t border-slate-200 bg-white">
+<footer class="mt-20 border-t border-slate-200/80 bg-white">
 	<div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
 		<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
 			<!-- Brand Info -->
 			<div class="lg:col-span-2">
-				<a href="/" class="mb-3 flex items-center gap-2.5">
+				<a href="/" class="mb-3.5 flex items-center gap-2.5 group">
 					<div
-						class="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-[#0284C7] to-[#0369A1] text-white shadow-sm"
+						class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#0284C7] to-[#0369A1] text-white shadow-xs transition-transform duration-200 group-hover:scale-105"
 					>
 						<Landmark size={18} strokeWidth={2.2} />
 					</div>
@@ -24,10 +24,10 @@
 
 			<!-- Categories -->
 			<div>
-				<h3 class="font-heading mb-3 text-xs font-bold uppercase tracking-wider text-slate-900">
+				<h3 class="font-heading mb-3.5 text-xs font-bold uppercase tracking-wider text-slate-900">
 					Browse Circulars
 				</h3>
-				<ul class="space-y-2 text-xs">
+				<ul class="space-y-2.5 text-xs">
 					<li>
 						<a href="/jobs/government" class="text-slate-600 transition-colors hover:text-[#0284C7]">
 							Government Jobs (BCS, Ministries)
@@ -48,10 +48,10 @@
 
 			<!-- Official Portals -->
 			<div>
-				<h3 class="font-heading mb-3 text-xs font-bold uppercase tracking-wider text-slate-900">
+				<h3 class="font-heading mb-3.5 text-xs font-bold uppercase tracking-wider text-slate-900">
 					Official Resources
 				</h3>
-				<ul class="space-y-2 text-xs">
+				<ul class="space-y-2.5 text-xs">
 					<li>
 						<a
 							href="https://bpsc.gov.bd"
@@ -102,3 +102,4 @@
 		</div>
 	</div>
 </footer>
+

@@ -130,7 +130,7 @@
 	<!-- ── Full-Width Circular Dossier ─────────────────────────────────── -->
 	<article class="space-y-6" aria-label="Job circular announcement details">
 		<!-- Header Card -->
-		<div class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
+		<div class="rounded-2xl border border-slate-200/90 bg-gradient-to-br from-white via-white to-slate-50/50 p-6 sm:p-8 shadow-xs">
 			<!-- Badges -->
 			<div class="mb-4 flex flex-wrap items-center gap-2">
 				<Badge
@@ -157,7 +157,7 @@
 			</h1>
 
 			{#if job.organization}
-				<div class="mt-2 flex items-center gap-2 text-base font-semibold text-slate-700">
+				<div class="mt-2.5 flex items-center gap-2 text-base font-semibold text-slate-700">
 					{#if job.category === 'government'}
 						<Landmark size={18} class="text-emerald-700" />
 					{:else}
@@ -178,7 +178,7 @@
 							: 'bg-slate-50 border-slate-200 text-slate-800'}"
 				>
 					<div class="flex items-center gap-3">
-						<Clock size={18} class="shrink-0 {status === 'closed' ? 'text-rose-600' : approaching ? 'text-amber-600' : 'text-[#0284C7]'}" />
+						<Clock size={18} class="shrink-0 {status === 'closed' ? 'text-rose-600' : approaching ? 'text-amber-600 animate-pulse' : 'text-[#0284C7]'}" />
 						<div>
 							{#if status === 'closed'}
 								<span class="font-bold">Applications Closed:</span> This circular officially expired on {formatDate(job.applicationDeadline)}.
@@ -197,7 +197,7 @@
 							href={job.applicationLink}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="inline-flex items-center gap-1.5 rounded-lg bg-[#0284C7] px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-[#0369A1] transition"
+							class="inline-flex items-center gap-1.5 rounded-lg bg-[#0284C7] px-3.5 py-1.5 text-xs font-semibold text-white shadow-xs hover:bg-[#0369A1] transition active:scale-[0.98]"
 						>
 							<span>Apply Online</span>
 							<ExternalLink size={12} />
@@ -213,10 +213,10 @@
 						href={job.applicationLink}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="inline-flex items-center gap-2 rounded-xl bg-[#0284C7] px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-[#0369A1] focus-visible:ring-2 focus-visible:ring-[#0284C7]"
+						class="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#0369A1] px-5 py-2.5 text-xs font-semibold text-white shadow-xs transition-all duration-200 hover:shadow-md hover:brightness-105 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-[#0284C7]"
 					>
 						<span>Apply Online via Official Portal</span>
-						<ExternalLink size={14} />
+						<ExternalLink size={14} class="transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
 					</a>
 				{:else if status === 'closed'}
 					<div class="inline-flex items-center gap-2 rounded-xl bg-rose-50 px-4 py-2.5 text-xs font-semibold text-rose-700 border border-rose-200">
@@ -235,7 +235,7 @@
 						href={job.officialNoticeLink}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-50 hover:text-slate-900"
+						class="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-50 hover:text-slate-900 shadow-2xs active:scale-[0.98]"
 					>
 						<Globe size={14} />
 						<span>Official Notice Page</span>
@@ -245,7 +245,7 @@
 				<button
 					type="button"
 					onclick={handleShare}
-					class="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-50 hover:text-slate-900"
+					class="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-50 hover:text-slate-900 shadow-2xs active:scale-[0.98]"
 					aria-label="Share circular link"
 				>
 					{#if copied}
@@ -258,6 +258,7 @@
 				</button>
 			</div>
 		</div>
+
 
 		<!-- ── Top Pinned Quick Facts Panel ─────────────────────────────── -->
 		<div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" aria-label="Circular summary quick facts">
@@ -469,8 +470,10 @@
 				</a>
 			</div>
 			<div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-				{#each relatedJobs as rj (rj.id)}
-					<JobCard job={rj} compact />
+				{#each relatedJobs as rj, i (rj.id)}
+					<div class="animate-fade-up stagger-{(i % 6) + 1}">
+						<JobCard job={rj} compact />
+					</div>
 				{/each}
 			</div>
 		</section>

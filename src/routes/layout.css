@@ -118,3 +118,82 @@ input[type="submit"] {
 ::-webkit-scrollbar-thumb:hover {
 	background: #94A3B8;
 }
+
+/* ── UI UX Pro Max Animation & Modern Interactive Utility Classes ────── */
+@keyframes subtleFadeUp {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes subtlePulse {
+	0%, 100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 0.85;
+		transform: scale(1.03);
+	}
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
+}
+
+.animate-fade-up {
+	animation: subtleFadeUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pulse-subtle {
+	animation: subtlePulse 2.5s ease-in-out infinite;
+}
+
+.animate-shimmer {
+	background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+	background-size: 200% 100%;
+	animation: shimmer 2s infinite;
+}
+
+.card-interactive {
+	transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+	            box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+	            border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-interactive:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 14px 30px -8px rgba(15, 23, 42, 0.10), 0 8px 14px -6px rgba(15, 23, 42, 0.05);
+}
+
+.glass-panel {
+	background-color: rgba(255, 255, 255, 0.88);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border: 1px solid rgba(226, 232, 240, 0.85);
+}
+
+.glass-panel-subtle {
+	background-color: rgba(248, 250, 252, 0.85);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	border: 1px solid rgba(226, 232, 240, 0.7);
+}
+
+/* Stagger animations for list items */
+.stagger-1 { animation-delay: 40ms; }
+.stagger-2 { animation-delay: 80ms; }
+.stagger-3 { animation-delay: 120ms; }
+.stagger-4 { animation-delay: 160ms; }
+.stagger-5 { animation-delay: 200ms; }
+.stagger-6 { animation-delay: 240ms; }

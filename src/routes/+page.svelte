@@ -44,10 +44,13 @@
 </svelte:head>
 
 <!-- ── Editorial Hero ──────────────────────────────────────────────────────── -->
-<section class="border-b border-slate-200 bg-white py-12 sm:py-16">
-	<div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+<section class="relative overflow-hidden border-b border-slate-200/80 bg-gradient-to-b from-sky-50/50 via-white to-slate-50/50 py-12 sm:py-16">
+	<!-- Ambient Background Blur Glows -->
+	<div class="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[650px] h-[320px] bg-gradient-to-r from-sky-400/10 via-emerald-400/10 to-indigo-400/10 blur-3xl rounded-full" aria-hidden="true"></div>
+
+	<div class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
 		<!-- Live Notice Pill -->
-		<div class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1 text-xs font-semibold text-slate-700 shadow-sm mb-5">
+		<div class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 backdrop-blur-xs px-3.5 py-1 text-xs font-semibold text-slate-700 shadow-xs mb-5 transition-transform hover:scale-105">
 			<span class="relative flex h-2 w-2">
 				<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
 				<span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
@@ -64,13 +67,13 @@
 
 		<!-- Subtitle -->
 		<p class="mt-4 text-base text-slate-600 sm:text-lg max-w-2xl mx-auto leading-relaxed">
-			Discover official government gazettes, BCS announcements, state-owned bank vacancies, and top corporate job circulars with live official circular portals.
+			Discover verified government gazettes, BCS announcements, state-owned bank vacancies, and top corporate job circulars with live official circular portals.
 		</p>
 
 		<!-- Multi-Field Integrated Search Bar -->
 		<form
 			onsubmit={handleSearch}
-			class="mt-8 mx-auto max-w-2xl rounded-2xl border border-slate-200 bg-slate-50/80 p-2 shadow-sm focus-within:border-[#0284C7] focus-within:bg-white focus-within:ring-4 focus-within:ring-[#0284C7]/10 transition-all duration-200"
+			class="mt-8 mx-auto max-w-2xl rounded-2xl border border-slate-200/90 bg-white/95 p-2 shadow-sm focus-within:border-[#0284C7] focus-within:ring-4 focus-within:ring-[#0284C7]/15 transition-all duration-200"
 			role="search"
 			aria-label="Find circulars"
 		>
@@ -105,30 +108,33 @@
 				<!-- Search Submit Button -->
 				<button
 					type="submit"
-					class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0284C7] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0369A1] focus-visible:ring-2 focus-visible:ring-[#0284C7]"
+					class="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#0369A1] px-6 py-3 text-sm font-semibold text-white shadow-xs transition-all duration-200 hover:shadow-md hover:brightness-105 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-[#0284C7]"
 				>
 					<span>Search</span>
-					<ArrowRight size={14} />
+					<ArrowRight size={14} class="transition-transform duration-150 group-hover:translate-x-0.5" />
 				</button>
 			</div>
 		</form>
 
 		<!-- Trending Circular Tags -->
 		<div class="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs text-slate-500">
-			<span class="font-medium text-slate-400">Popular:</span>
-			<a href="/jobs?q=BCS" class="rounded-md border border-slate-200 bg-white px-2.5 py-1 text-slate-700 hover:border-slate-300 hover:text-[#0284C7] transition">
+			<span class="font-semibold text-slate-400">Popular:</span>
+			<a href="/jobs?q=BCS" class="rounded-lg border border-slate-200 bg-white/80 px-2.5 py-1 text-slate-700 hover:border-sky-300 hover:text-[#0284C7] hover:bg-sky-50/50 transition-all shadow-2xs">
 				BCS Cadre
 			</a>
-			<a href="/jobs?q=Police" class="rounded-md border border-slate-200 bg-white px-2.5 py-1 text-slate-700 hover:border-slate-300 hover:text-[#0284C7] transition">
+			<a href="/jobs?q=Tax" class="rounded-lg border border-slate-200 bg-white/80 px-2.5 py-1 text-slate-700 hover:border-emerald-300 hover:text-emerald-700 hover:bg-emerald-50/50 transition-all shadow-2xs">
+				Taxes Zone
+			</a>
+			<a href="/jobs?q=Police" class="rounded-lg border border-slate-200 bg-white/80 px-2.5 py-1 text-slate-700 hover:border-sky-300 hover:text-[#0284C7] hover:bg-sky-50/50 transition-all shadow-2xs">
 				Police SI
 			</a>
-			<a href="/jobs?q=Teacher" class="rounded-md border border-slate-200 bg-white px-2.5 py-1 text-slate-700 hover:border-slate-300 hover:text-[#0284C7] transition">
+			<a href="/jobs?q=Teacher" class="rounded-lg border border-slate-200 bg-white/80 px-2.5 py-1 text-slate-700 hover:border-sky-300 hover:text-[#0284C7] hover:bg-sky-50/50 transition-all shadow-2xs">
 				NTRCA Teacher
 			</a>
-			<a href="/jobs?q=Officer" class="rounded-md border border-slate-200 bg-white px-2.5 py-1 text-slate-700 hover:border-slate-300 hover:text-[#0284C7] transition">
+			<a href="/jobs?q=Officer" class="rounded-lg border border-slate-200 bg-white/80 px-2.5 py-1 text-slate-700 hover:border-sky-300 hover:text-[#0284C7] hover:bg-sky-50/50 transition-all shadow-2xs">
 				Bank Officer
 			</a>
-			<a href="/jobs?q=Engineer" class="rounded-md border border-slate-200 bg-white px-2.5 py-1 text-slate-700 hover:border-slate-300 hover:text-[#0284C7] transition">
+			<a href="/jobs?q=Engineer" class="rounded-lg border border-slate-200 bg-white/80 px-2.5 py-1 text-slate-700 hover:border-indigo-300 hover:text-indigo-700 hover:bg-indigo-50/50 transition-all shadow-2xs">
 				Software Engineer
 			</a>
 		</div>
@@ -143,11 +149,11 @@
 			<!-- Government Pathway -->
 			<a
 				href="/jobs/government"
-				class="group relative flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-emerald-300 hover:shadow-md"
+				class="group card-interactive relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-gradient-to-br from-white via-white to-emerald-50/30 p-6 sm:p-7 shadow-xs hover:border-emerald-300 hover:shadow-lg"
 			>
 				<div>
 					<div class="flex items-center justify-between mb-4">
-						<div class="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200 group-hover:scale-105 transition-transform">
+						<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200 group-hover:scale-105 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-200">
 							<Landmark size={22} strokeWidth={2.2} />
 						</div>
 						<span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-800 ring-1 ring-emerald-200">
@@ -163,18 +169,18 @@
 				</div>
 				<div class="mt-6 flex items-center gap-1.5 text-xs font-semibold text-emerald-700">
 					<span>Browse all government vacancies</span>
-					<ArrowRight size={13} class="group-hover:translate-x-1 transition-transform" />
+					<ArrowRight size={13} class="transition-transform duration-150 group-hover:translate-x-1" />
 				</div>
 			</a>
 
 			<!-- Corporate Pathway -->
 			<a
 				href="/jobs/corporate"
-				class="group relative flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-indigo-300 hover:shadow-md"
+				class="group card-interactive relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-gradient-to-br from-white via-white to-indigo-50/30 p-6 sm:p-7 shadow-xs hover:border-indigo-300 hover:shadow-lg"
 			>
 				<div>
 					<div class="flex items-center justify-between mb-4">
-						<div class="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-50 text-indigo-700 ring-1 ring-indigo-200 group-hover:scale-105 transition-transform">
+						<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-indigo-700 ring-1 ring-indigo-200 group-hover:scale-105 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-200">
 							<Briefcase size={22} strokeWidth={2.2} />
 						</div>
 						<span class="rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-800 ring-1 ring-indigo-200">
@@ -190,7 +196,7 @@
 				</div>
 				<div class="mt-6 flex items-center gap-1.5 text-xs font-semibold text-indigo-700">
 					<span>Browse all corporate vacancies</span>
-					<ArrowRight size={13} class="group-hover:translate-x-1 transition-transform" />
+					<ArrowRight size={13} class="transition-transform duration-150 group-hover:translate-x-1" />
 				</div>
 			</a>
 		</div>
@@ -218,8 +224,10 @@
 		</div>
 
 		<div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-			{#each latestJobs as job (job.id)}
-				<JobCard {job} />
+			{#each latestJobs as job, i (job.id)}
+				<div class="animate-fade-up stagger-{(i % 6) + 1}">
+					<JobCard {job} />
+				</div>
 			{:else}
 				<div class="col-span-full rounded-2xl border border-dashed border-slate-200 bg-slate-50/60 p-12 text-center">
 					<div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-slate-400 mb-3">
@@ -236,32 +244,40 @@
 
 	<!-- ── Closing Soon Notice Bar ──────────────────────────────────────────── -->
 	{#if upcomingDeadlines.length > 0}
-		<section class="rounded-2xl border border-amber-200 bg-amber-50/50 p-6 shadow-sm" aria-labelledby="closing-soon-heading">
-			<div class="flex items-center gap-2 mb-4 text-amber-900">
-				<Clock size={18} class="text-amber-600" />
-				<h2 id="closing-soon-heading" class="font-heading text-base font-bold">
-					Closing Soon — Deadlines Within 14 Days
-				</h2>
+		<section class="card-interactive rounded-2xl border border-amber-200/90 bg-gradient-to-br from-amber-50/70 via-white to-amber-50/40 p-6 shadow-xs" aria-labelledby="closing-soon-heading">
+			<div class="flex items-center justify-between border-b border-amber-200/60 pb-3 mb-4">
+				<div class="flex items-center gap-2.5 text-amber-900">
+					<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-100 text-amber-700">
+						<Clock size={16} />
+					</div>
+					<h2 id="closing-soon-heading" class="font-heading text-sm font-bold uppercase tracking-wider">
+						Closing Soon — Deadlines Approaching
+					</h2>
+				</div>
+				<span class="rounded-full bg-amber-100 px-2.5 py-0.5 text-[11px] font-semibold text-amber-800">
+					Next 14 Days
+				</span>
 			</div>
 
 			<div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
 				{#each upcomingDeadlines as job (job.id)}
 					<a
 						href={`/jobs/${job.slug ?? job.id}`}
-						class="flex flex-col justify-between rounded-xl border border-amber-200/80 bg-white p-3.5 transition hover:border-amber-300 hover:shadow-sm"
+						class="group flex flex-col justify-between rounded-xl border border-amber-200/80 bg-white p-3.5 shadow-2xs transition-all duration-200 hover:border-amber-400 hover:shadow-sm"
 					>
 						<div>
-							<div class="text-[11px] font-semibold text-amber-800 uppercase tracking-wide">
-								{job.category}
+							<div class="flex items-center justify-between text-[11px] font-semibold">
+								<span class="text-amber-800 uppercase tracking-wide">{job.category}</span>
+								<span class="rounded bg-amber-50 px-1.5 py-0.5 text-amber-700 text-[10px]">Expiring</span>
 							</div>
-							<h3 class="font-heading mt-1 text-xs font-bold text-slate-900 line-clamp-1">
+							<h3 class="font-heading mt-1.5 text-xs font-bold text-slate-900 line-clamp-1 group-hover:text-amber-800 transition-colors">
 								{job.title}
 							</h3>
-							<p class="text-[11px] text-slate-500 truncate">{job.organization}</p>
+							<p class="mt-0.5 text-[11px] text-slate-500 truncate">{job.organization}</p>
 						</div>
-						<div class="mt-3 pt-2 border-t border-amber-100 flex items-center justify-between text-[11px] text-amber-800 font-semibold">
+						<div class="mt-3 pt-2.5 border-t border-amber-100 flex items-center justify-between text-[11px] text-amber-800 font-semibold">
 							<span>Deadline: {job.applicationDeadline}</span>
-							<ArrowRight size={11} />
+							<ArrowRight size={12} class="transition-transform duration-150 group-hover:translate-x-0.5 text-amber-600" />
 						</div>
 					</a>
 				{/each}
@@ -269,3 +285,4 @@
 		</section>
 	{/if}
 </div>
+
